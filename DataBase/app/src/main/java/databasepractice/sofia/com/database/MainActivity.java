@@ -12,7 +12,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHelper = new SofiaDatabaseHelper(this,"BookStore.db",null,1);
+        //版本号可以让onUpdate方法执行起来
+        dbHelper = new SofiaDatabaseHelper(this,"BookStore.db",null,2);
         Button createDatabase = (Button)findViewById(R.id.create_database);
         createDatabase.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,6 +14,11 @@ public class SofiaDatabaseHelper extends SQLiteOpenHelper {
             + "pages integer, "
             + "name text)";
 
+    private static final String CREATE_CATEGORY = "create table Category ("
+            + "id integer primary key autoincrement, "
+            + "category_name text, "
+            + "category_code integer)";
+
     private Context mContext;
 
     public SofiaDatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -23,12 +28,21 @@ public class SofiaDatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        //建表语句
+        //建Book表语句
+        //如果Book表已经存在则不会再次创建
         sqLiteDatabase.execSQL(CREATE_BOOT);
+
+        //创建Table表用于管理图书分类
+        sqLiteDatabase.execSQL(CREATE_CATEGORY);
         Toast.makeText(mContext,"Create successed", Toast.LENGTH_SHORT).show();
     }
 
+    //升级数据库
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        //如果Book表存在则删除
+        sqLiteDatabase.execSQL("drop table if exists Book");
+        sqLiteDatabase.execSQL("drop table if exists Category");
+        onCreate(sqLiteDatabase);
     }
 }
