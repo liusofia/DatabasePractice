@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 public class SofiaDatabaseHelper extends SQLiteOpenHelper {
     //创建表
+    //表的名字
     public static final String CREATE_BOOT = "create table Book ("
             + "id integer primary key autoincrement, "
             + "author text, "
