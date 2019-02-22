@@ -10,6 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     private SofiaDatabaseHelper dbHelper;
     private Button mAddData;
+    private Button mUpdateData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +18,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //版本号可以让onUpdate方法执行起来
         //数据库的名字
-        dbHelper = new SofiaDatabaseHelper(this,"BookStore.db",null,2);
+        dbHelper = new SofiaDatabaseHelper(this,"BookStore.db",null,3);
         Button createDatabase = (Button)findViewById(R.id.create_database);
         createDatabase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //创建数据库
                 dbHelper.getWritableDatabase();
             }
         });
@@ -45,6 +47,19 @@ public class MainActivity extends AppCompatActivity {
                 values.put("pages","810");
                 values.put("price","900");
                 db.insert("Book",null,values);
+            }
+        });
+
+        //更新数据
+        mUpdateData = (Button)findViewById(R.id.update_data);
+        mUpdateData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("price",11.11);
+                //更新哪个表中的哪个值，哪一列
+                db.update("Book",values,"name = ?",new String[]{"hahaji"});
             }
         });
     }
