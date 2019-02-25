@@ -41,7 +41,7 @@ public class SofiaDatabaseHelper extends SQLiteOpenHelper {
     //升级数据库
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        //如果Book表存在则删除
+        //如果Book表存在则删除,这会有问题，每次升级数据库都会要把所有的数据删除掉
         sqLiteDatabase.execSQL("drop table if exists Book");
         sqLiteDatabase.execSQL("drop table if exists Category");
         onCreate(sqLiteDatabase);
