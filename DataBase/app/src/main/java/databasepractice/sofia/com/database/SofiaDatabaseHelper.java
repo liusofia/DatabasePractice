@@ -35,7 +35,9 @@ public class SofiaDatabaseHelper extends SQLiteOpenHelper {
 
         //创建Table表用于管理图书分类
         sqLiteDatabase.execSQL(CREATE_CATEGORY);
-        Toast.makeText(mContext,"Create successed", Toast.LENGTH_SHORT).show();
+        //跨进程访问不能使用Toast,通过内容提供器加入外部访问的接口
+
+//        Toast.makeText(mContext,"Create successed", Toast.LENGTH_SHORT).show();
     }
 
     //升级数据库

@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 内容提供器 -->
+        <provider
+            android:name=".DatabaseProvider"
+            android:authorities="databasepractice.sofia.com.database"
+            android:enabled="true"
+            android:exported="true"></provider>
     </application>
 
 </manifest>
